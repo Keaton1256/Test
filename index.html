@@ -3,91 +3,89 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>YourStartup</title>
-  <meta name="description" content="A student startup prototype for BSAD 281.">
+  <title>Tut's Garden | Plant watering reminders</title>
+  <meta name="description" content="Keep your plants thriving with a simple, priority-first watering list.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-  <!-- =========================================================
-       HEADER: logo text + navigation.
-       Each link points to a "view" further down the page (#home, #explore, #about).
-       ========================================================= -->
   <header class="site-header">
-    <a class="brand" href="#home" id="brand-name">YourStartup</a>
-    <nav aria-label="Main">
-      <a href="#home">Home</a>
-      <a href="#explore">Explore</a>
-      <a href="#about">About</a>
-    </nav>
+    <a class="brand" href="#garden" aria-label="Tut's Garden home">
+      <span class="brand-mark" aria-hidden="true">T</span>
+      <span>Tut's Garden</span>
+    </a>
+    <p class="header-note">A little ancient wisdom for your everyday jungle</p>
   </header>
 
-  <main>
+  <main id="garden">
+    <section class="page-heading" aria-labelledby="page-title">
+      <p class="eyebrow">Your royal watering order</p>
+      <h1 id="page-title">Watering, sorted.</h1>
+      <p>See who needs a drink first, then keep every plant on its own rhythm.</p>
+    </section>
 
-    <!-- =======================================================
-         VIEW 1: HOME — what you do, for whom, and why it matters.
-         ======================================================= -->
-    <section id="home" data-view>
-      <div class="hero">
-        <p class="eyebrow">Prototype</p>
-        <h1 id="tagline">One sentence that says what your startup does.</h1>
-        <p class="lead" id="pitch">
-          Who is your customer, what problem do they have, and why is your
-          solution better than what they use today?
-        </p>
-        <a class="button" href="#explore">See it in action</a>
+    <section class="summary-bar" aria-label="Garden summary">
+      <div class="summary-message">
+        <span class="summary-seal" aria-hidden="true">&#10022;</span>
+        <p id="due-summary" aria-live="polite"></p>
       </div>
-
-      <div class="steps">
-        <div class="card">
-          <h2>1. Step one</h2>
-          <p>Describe the first thing a customer does.</p>
-        </div>
-        <div class="card">
-          <h2>2. Step two</h2>
-          <p>Describe what happens next.</p>
-        </div>
-        <div class="card">
-          <h2>3. Step three</h2>
-          <p>Describe the result the customer gets.</p>
-        </div>
-      </div>
+      <div class="summary-stat"><strong id="due-count">0</strong><span>need water</span></div>
+      <div class="summary-stat"><strong id="plant-count">0</strong><span>in your garden</span></div>
     </section>
 
-    <!-- =======================================================
-         VIEW 2: EXPLORE — a list built from the fake data in data.js.
-         ======================================================= -->
-    <section id="explore" data-view hidden>
-      <h1>Explore</h1>
-      <p class="muted">These examples are fake. They come from <code>data.js</code>.</p>
+    <div class="garden-layout">
+      <section class="plants-panel" aria-labelledby="plants-heading">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">The garden</p>
+            <h2 id="plants-heading">Your plants</h2>
+          </div>
+          <div class="filters" role="group" aria-label="Filter plants">
+            <button type="button" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" data-filter="due" aria-pressed="false">Need water</button>
+            <button type="button" data-filter="upcoming" aria-pressed="false">Upcoming</button>
+          </div>
+        </div>
+        <div id="plant-list" class="plant-list" aria-live="polite"></div>
+        <p id="empty-message" class="empty-message" hidden></p>
+      </section>
 
-      <label class="search">
-        <span>Search</span>
-        <input type="search" id="search-box" placeholder="Type to filter…">
-      </label>
+      <aside class="side-column">
+        <section class="form-panel" id="add-plant" aria-labelledby="form-heading">
+          <p class="section-kicker">Make room for one more</p>
+          <h2 id="form-heading">Add a plant</h2>
+          <form id="plant-form">
+            <label for="plant-name">Plant name</label>
+            <input id="plant-name" name="name" type="text" placeholder="e.g. Monstera" maxlength="50" required>
 
-      <p class="muted" id="saved-count"></p>
-      <div class="grid" id="listing-grid"></div>
-      <p class="empty" id="empty-message" hidden>Nothing matches your search.</p>
-    </section>
+            <label for="watering-interval">Water every</label>
+            <div class="input-with-unit">
+              <input id="watering-interval" name="interval" type="number" min="1" max="60" value="7" required>
+              <span>days</span>
+            </div>
 
-    <!-- =======================================================
-         VIEW 3: ABOUT — your team and your story.
-         ======================================================= -->
-    <section id="about" data-view hidden>
-      <h1>About us</h1>
-      <p>Tell the story of why your team started this company.</p>
-      <p>Use first names only, or no names at all — this site is public.</p>
-    </section>
+            <label for="last-watered">Last watered</label>
+            <input id="last-watered" name="lastWatered" type="date" required>
 
+            <button class="add-button" type="submit"><span aria-hidden="true">+</span> Add to garden</button>
+          </form>
+        </section>
+
+        <section class="sponsor-panel" aria-label="Sample sponsored placement">
+          <span class="sponsor-label">Sponsored</span>
+          <div class="sponsor-art" aria-hidden="true"><span>&#10022;</span></div>
+          <h2>Good things grow here.</h2>
+          <p>A sample spot for a local nursery or plant-care partner.</p>
+          <p class="ad-note">Ad preview only. No advertiser or tracking is connected.</p>
+        </section>
+      </aside>
+    </div>
   </main>
 
-  <!-- Keep this footer. Your site must say it is a student project. -->
   <footer class="site-footer">
-    <p>Student prototype for BSAD 281 at St. Francis Xavier University. Not a real company — all data is fictional.</p>
+    <span>Tut's Garden</span>
+    <p>Student prototype for BSAD 281 at St. Francis Xavier University. Not a real company; all data is fictional.</p>
   </footer>
 
-  <!-- Scripts load in this order: data first, then the code that uses it. -->
   <script src="data.js"></script>
   <script src="app.js"></script>
 </body>
